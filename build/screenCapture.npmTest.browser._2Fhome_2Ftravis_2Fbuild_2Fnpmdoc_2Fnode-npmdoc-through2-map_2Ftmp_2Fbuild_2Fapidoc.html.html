@@ -1,0 +1,216 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/brycebaril/through2-map#readme">through2-map (v3.0.0)</a>
+</h1>
+<h4>A through2 to create an Array.prototype.map analog for streams.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.through2-map">module through2-map</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.through2-map.ctor">
+            function <span class="apidocSignatureSpan">through2-map.</span>ctor
+            <span class="apidocSignatureSpan">(options, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.through2-map.obj">
+            function <span class="apidocSignatureSpan">through2-map.</span>obj
+            <span class="apidocSignatureSpan">(options, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.through2-map.objCtor">
+            function <span class="apidocSignatureSpan">through2-map.</span>objCtor
+            <span class="apidocSignatureSpan">(options, fn)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.through2-map" id="apidoc.module.through2-map">module through2-map</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.through2-map.ctor" id="apidoc.element.through2-map.ctor">
+        function <span class="apidocSignatureSpan">through2-map.</span>ctor
+        <span class="apidocSignatureSpan">(options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ctor(options, fn) {
+  if (typeof options == "function") {
+    fn = options
+    options = {}
+  }
+
+  var Map = through2.ctor(options, function (chunk, encoding, callback) {
+    if (this.options.wantStrings) chunk = chunk.toString()
+    try {
+      this.push(fn.call(this, chunk, this._index++))
+      return callback()
+    } catch (e) {
+      return callback(e)
+    }
+  })
+  Map.prototype._index = 0
+  return Map
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+Create a `stream.Transform` instance that will call `fn(chunk, index)` on each stream segment.
+
+- - -
+
+```
+var Tx = require("through2-map").<span class="apidocCodeKeywordSpan">ctor</span>([options,] fn)
+```
+
+Create a reusable `stream.Transform` TYPE that can be called via `new Tx` or `Tx()` to create an instance.
+
+- - -
+
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.through2-map.obj" id="apidoc.element.through2-map.obj">
+        function <span class="apidocSignatureSpan">through2-map.</span>obj
+        <span class="apidocSignatureSpan">(options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function obj(options, fn) {
+  if (typeof options === "function") {
+    fn = options
+    options = {}
+  }
+  options = xtend({objectMode: true, highWaterMark: 16}, options)
+  return make(options, fn)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+Create a reusable `stream.Transform` TYPE that can be called via `new Tx` or `Tx()` to create an instance.
+
+- - -
+
+```
+require("through2-map").<span class="apidocCodeKeywordSpan">obj</span>([options,] fn)
+```
+
+Create a `through2-map` instance that defaults to `objectMode: true`.
+
+- - -
+
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.through2-map.objCtor" id="apidoc.element.through2-map.objCtor">
+        function <span class="apidocSignatureSpan">through2-map.</span>objCtor
+        <span class="apidocSignatureSpan">(options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function objCtor(options, fn) {
+  if (typeof options === "function") {
+    fn = options
+    options = {}
+  }
+  options = xtend({objectMode: true, highWaterMark: 16}, options)
+  return ctor(options, fn)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+Create a `through2-map` instance that defaults to `objectMode: true`.
+
+- - -
+
+```
+require("through2-map").<span class="apidocCodeKeywordSpan">objCtor</span>([options,] fn)
+```
+
+Just like ctor, but with `objectMode: true` defaulting to true.
+
+Options
+-------
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
