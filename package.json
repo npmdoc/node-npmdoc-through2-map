@@ -1,17 +1,40 @@
 {
-    "buildNpmdoc":"through2-map",
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "buildNpmdoc": "through2-map",
+    "description": "api documentation for [through2-map (v3.0.0)](https://github.com/brycebaril/through2-map#readme) [![npm package](https://img.shields.io/npm/v/npmdoc-through2-map.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-through2-map) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-through2-map.svg)](https://travis-ci.org/npmdoc/node-npmdoc-through2-map)",
     "devDependencies": {
-        "through2-map": "*",
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "through2-map": "*",
         "utility2": "kaizhu256/node-utility2#alpha"
     },
-    "name":"npmdoc-through2-map",
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-through2-map",
+    "keywords": [
+        "documentation",
+        "through2-map"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_through2_map.js",
+    "name": "npmdoc-through2-map",
+    "nameAlias": "npmdoc_through2_map",
+    "nameOriginal": "npmdoc-through2-map",
+    "os": [
+        "darwin",
+        "linux"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/npmdoc/node-npmdoc-through2-map"
     },
     "scripts": {
-        "build-ci": "utility2 shReadmeTest build_ci.sh"
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "(set -e; npm install \"kaizhu256/node-utility2#alpha\"; utility2 shDeployHeroku)",
+        "postinstall": "if [ -f npm_scripts.sh ]; then ./npm_scripts.sh postinstall; fi",
+        "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
     "version": "0.0.1"
 }
