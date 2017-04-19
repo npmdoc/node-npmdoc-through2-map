@@ -1,9 +1,14 @@
-# api documentation for  [through2-map (v3.0.0)](https://github.com/brycebaril/through2-map#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-through2-map.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-through2-map) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-through2-map.svg)](https://travis-ci.org/npmdoc/node-npmdoc-through2-map)
+# npmdoc-through2-map
+
+#### api documentation for  [through2-map (v3.0.0)](https://github.com/brycebaril/through2-map#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-through2-map.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-through2-map) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-through2-map.svg)](https://travis-ci.org/npmdoc/node-npmdoc-through2-map)
+
 #### A through2 to create an Array.prototype.map analog for streams.
 
-[![NPM](https://nodei.co/npm/through2-map.png?downloads=true)](https://www.npmjs.com/package/through2-map)
+[![NPM](https://nodei.co/npm/through2-map.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/through2-map)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-through2-map/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-through2-map_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-through2-map/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-through2-map/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-through2-map/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-through2-map/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-through2-map/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-through2-map/build/screenCapture.npmPackageListing.svg)
 
@@ -61,13 +66,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "bryce",
-            "email": "bryce@ravenwall.com"
+            "name": "bryce"
         }
     ],
     "name": "through2-map",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@github.com/brycebaril/through2-map.git"
@@ -77,127 +80,6 @@
     },
     "version": "3.0.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module through2-map](#apidoc.module.through2-map)
-1.  [function <span class="apidocSignatureSpan">through2-map.</span>ctor (options, fn)](#apidoc.element.through2-map.ctor)
-1.  [function <span class="apidocSignatureSpan">through2-map.</span>obj (options, fn)](#apidoc.element.through2-map.obj)
-1.  [function <span class="apidocSignatureSpan">through2-map.</span>objCtor (options, fn)](#apidoc.element.through2-map.objCtor)
-
-
-
-# <a name="apidoc.module.through2-map"></a>[module through2-map](#apidoc.module.through2-map)
-
-#### <a name="apidoc.element.through2-map.ctor"></a>[function <span class="apidocSignatureSpan">through2-map.</span>ctor (options, fn)](#apidoc.element.through2-map.ctor)
-- description and source-code
-```javascript
-function ctor(options, fn) {
-  if (typeof options == "function") {
-    fn = options
-    options = {}
-  }
-
-  var Map = through2.ctor(options, function (chunk, encoding, callback) {
-    if (this.options.wantStrings) chunk = chunk.toString()
-    try {
-      this.push(fn.call(this, chunk, this._index++))
-      return callback()
-    } catch (e) {
-      return callback(e)
-    }
-  })
-  Map.prototype._index = 0
-  return Map
-}
-```
-- example usage
-```shell
-...
-'''
-
-Create a 'stream.Transform' instance that will call 'fn(chunk, index)' on each stream segment.
-
-- - -
-
-'''
-var Tx = require("through2-map").ctor([options,] fn)
-'''
-
-Create a reusable 'stream.Transform' TYPE that can be called via 'new Tx' or 'Tx()' to create an instance.
-
-- - -
-
-'''
-...
-```
-
-#### <a name="apidoc.element.through2-map.obj"></a>[function <span class="apidocSignatureSpan">through2-map.</span>obj (options, fn)](#apidoc.element.through2-map.obj)
-- description and source-code
-```javascript
-function obj(options, fn) {
-  if (typeof options === "function") {
-    fn = options
-    options = {}
-  }
-  options = xtend({objectMode: true, highWaterMark: 16}, options)
-  return make(options, fn)
-}
-```
-- example usage
-```shell
-...
-'''
-
-Create a reusable 'stream.Transform' TYPE that can be called via 'new Tx' or 'Tx()' to create an instance.
-
-- - -
-
-'''
-require("through2-map").obj([options,] fn)
-'''
-
-Create a 'through2-map' instance that defaults to 'objectMode: true'.
-
-- - -
-
-'''
-...
-```
-
-#### <a name="apidoc.element.through2-map.objCtor"></a>[function <span class="apidocSignatureSpan">through2-map.</span>objCtor (options, fn)](#apidoc.element.through2-map.objCtor)
-- description and source-code
-```javascript
-function objCtor(options, fn) {
-  if (typeof options === "function") {
-    fn = options
-    options = {}
-  }
-  options = xtend({objectMode: true, highWaterMark: 16}, options)
-  return ctor(options, fn)
-}
-```
-- example usage
-```shell
-...
-'''
-
-Create a 'through2-map' instance that defaults to 'objectMode: true'.
-
-- - -
-
-'''
-require("through2-map").objCtor([options,] fn)
-'''
-
-Just like ctor, but with 'objectMode: true' defaulting to true.
-
-Options
--------
-...
 ```
 
 
