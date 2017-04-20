@@ -1,6 +1,6 @@
 # npmdoc-through2-map
 
-#### api documentation for  [through2-map (v3.0.0)](https://github.com/brycebaril/through2-map#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-through2-map.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-through2-map) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-through2-map.svg)](https://travis-ci.org/npmdoc/node-npmdoc-through2-map)
+#### api documentation for  through2-map (v3.0.0)  [![npm package](https://img.shields.io/npm/v/npmdoc-through2-map.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-through2-map) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-through2-map.svg)](https://travis-ci.org/npmdoc/node-npmdoc-through2-map)
 
 #### A through2 to create an Array.prototype.map analog for streams.
 
@@ -21,31 +21,31 @@
 ```json
 
 {
-    "author": {
-        "name": "Bryce B. Baril"
-    },
-    "bugs": {
-        "url": "https://github.com/brycebaril/through2-map/issues"
-    },
-    "dependencies": {
-        "through2": "~2.0.0",
-        "xtend": "^4.0.0"
-    },
+    "name": "through2-map",
+    "version": "3.0.0",
     "description": "A through2 to create an Array.prototype.map analog for streams.",
-    "devDependencies": {
-        "stream-spigot": "~3.0.5",
-        "tape": "~4.0.0",
-        "terminus": "~1.0.12"
-    },
+    "main": "index.js",
     "directories": {
         "test": "test"
     },
-    "dist": {
-        "shasum": "a6c3026ce63b4898a997d540506b66ffd970f271",
-        "tarball": "https://registry.npmjs.org/through2-map/-/through2-map-3.0.0.tgz"
+    "scripts": {
+        "test": "node test/"
     },
-    "gitHead": "8a482d218bdf2de40bf867a1f28ffa9fa0a3b315",
-    "homepage": "https://github.com/brycebaril/through2-map#readme",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:brycebaril/through2-map.git"
+    },
+    "keywords": [
+        "streams",
+        "through",
+        "through2",
+        "map"
+    ],
+    "author": "Bryce B. Baril",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/brycebaril/through2-map/issues"
+    },
     "jshintConfig": {
         "asi": true,
         "globalstrict": true,
@@ -56,29 +56,15 @@
         "newcap": false,
         "eqeqeq": false
     },
-    "keywords": [
-        "streams",
-        "through",
-        "through2",
-        "map"
-    ],
-    "license": "MIT",
-    "main": "index.js",
-    "maintainers": [
-        {
-            "name": "bryce"
-        }
-    ],
-    "name": "through2-map",
-    "optionalDependencies": {},
-    "repository": {
-        "type": "git",
-        "url": "git+ssh://git@github.com/brycebaril/through2-map.git"
+    "devDependencies": {
+        "tape": "~4.0.0",
+        "stream-spigot": "~3.0.5",
+        "terminus": "~1.0.12"
     },
-    "scripts": {
-        "test": "node test/"
-    },
-    "version": "3.0.0"
+    "dependencies": {
+        "through2": "~2.0.0",
+        "xtend": "^4.0.0"
+    }
 }
 ```
 
