@@ -47,7 +47,7 @@
 }
 </style>
 <h1>api documentation for
-    <a>through2-map (v3.0.0)</a>
+    <a href="https://github.com/brycebaril/through2-map#readme">through2-map (v3.0.0)</a>
 </h1>
 <h4>A through2 to create an Array.prototype.map analog for streams.</h4>
 <div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
@@ -139,21 +139,21 @@
   return Map
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-```
 
-Create a `stream.Transform` instance that will call `fn(chunk, index)` on each stream segment.
+function ctor(options, fn) {
+if (typeof options == "function") {
+  fn = options
+  options = {}
+}
 
-- - -
-
-```
-var Tx = require("through2-map").<span class="apidocCodeKeywordSpan">ctor</span>([options,] fn)
-```
-
-Create a reusable `stream.Transform` TYPE that can be called via `new Tx` or `Tx()` to create an instance.
-
-- - -
-
-```
+var Map = through2.<span class="apidocCodeKeywordSpan">ctor</span>(options, function (chunk, encoding, callback) {
+  if (this.options.wantStrings) chunk = chunk.toString()
+  try {
+    this.push(fn.call(this, chunk, this._index++))
+    return callback()
+  } catch (e) {
+    return callback(e)
+  }
 ...</pre></li>
     </ul>
 
